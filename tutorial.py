@@ -65,7 +65,7 @@ dag = DAG(
 t1 = BashOperator(
     task_id='print_date',
     bash_command='date',
-    image='ubuntu:latest',
+    executor_config={"KubernetesExecutor": {"image": "ubuntu:latest"}},
     dag=dag,
 )
 
@@ -83,7 +83,7 @@ t2 = BashOperator(
     task_id='sleep',
     depends_on_past=False,
     bash_command='sleep 5',
-    image='ubuntu:latest',
+    executor_config={"KubernetesExecutor": {"image": "ubuntu:latest"}},
     dag=dag,
 )
 
@@ -100,7 +100,7 @@ t3 = BashOperator(
     depends_on_past=False,
     bash_command=templated_command,
     params={'my_param': 'Parameter I passed in'},
-    image='ubuntu:latest',
+    executor_config={"KubernetesExecutor": {"image": "ubuntu:latest"}},
     dag=dag,
 )
 
